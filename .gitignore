@@ -1,1 +1,3 @@
 IMAGE_PROCESS/
+.DS_Store
+__pycache__/
