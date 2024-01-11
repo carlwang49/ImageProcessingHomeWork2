@@ -1,0 +1,4 @@
+Fold 1/4 - Loss: 0.0186, Accuracy: 0.9944
+Fold 2/4 - Loss: 0.0166, Accuracy: 0.9947
+Fold 3/4 - Loss: 0.0208, Accuracy: 0.9941
+Fold 4/4 - Loss: 0.0174, Accuracy: 0.9948

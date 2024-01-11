@@ -1,4 +1,3 @@
-from PyQt6 import QtWidgets
 from interface import Ui_MainWindow
 from PyQt6.QtWidgets import (
     QMainWindow,
@@ -6,11 +5,9 @@ from PyQt6.QtWidgets import (
     QLabel,
     QWidget,
     QVBoxLayout,
-    QGraphicsPixmapItem,
     QApplication,
 )
-from PyQt6.QtGui import QPixmap, QImage
-from PyQt6.QtCore import QRect
+from PyQt6.QtGui import QPixmap
 from PyQt6.QtCore import Qt
 import os
 
