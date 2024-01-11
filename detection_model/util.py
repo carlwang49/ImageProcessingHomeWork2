@@ -176,18 +176,19 @@ def ensemble_predict_single_image(models, image_tensor, device, iou_threshold=0.
         return final_prediction
 
 
-def draw_boxes(image, prediction):
+def draw_boxes(image, prediction, title):
     """
     Draw bounding boxes on an image based on the prediction.
 
     Args:
         image (torch.Tensor): Input image tensor.
         prediction (dict): Prediction containing 'boxes' and 'labels'.
+        title (str): Title for the plot.
     """
     # Convert image tensor to numpy array
     image = image.permute(1, 2, 0).cpu().numpy()
 
-    fig, ax = plt.subplots(1, figsize=(12, 9))
+    fig, ax = plt.subplots(1, figsize=(8, 6))
     ax.imshow(image)
 
     # Extract boxes and labels
@@ -207,6 +208,7 @@ def draw_boxes(image, prediction):
         plt.text(x, y, class_labels.get(label, 'unknown'),
                  color=colors.get(label, 'green'), fontsize=12, bbox=dict(facecolor='white', alpha=0.5))
 
+    plt.title(title)
     plt.show()
 
 

@@ -113,7 +113,7 @@ def ensemble_predict(models, image_tensor):
 
 
 # Function to visualize the prediction
-def visualize_prediction(image_path, prediction, alpha=0.5):
+def visualize_prediction(image_path, prediction, alpha=0.5, title='Prediction'):
     # Read the original image
     image = Image.open(image_path).convert("RGB")
     image = image.resize((256, 256))
@@ -131,7 +131,9 @@ def visualize_prediction(image_path, prediction, alpha=0.5):
     overlayed_image.paste(Image.fromarray(mask_rgba, mode='RGBA'), (0, 0), Image.fromarray(mask_rgba, mode='RGBA'))
     
     # Display the image with the overlay
+    plt.figure()  # Create a new figure
     plt.imshow(overlayed_image)
+    plt.title(title)
     plt.axis('off')
     plt.show()
 

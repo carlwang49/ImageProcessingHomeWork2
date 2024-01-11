@@ -10,15 +10,20 @@ from PyQt6.QtWidgets import (
 from PyQt6.QtGui import QPixmap
 from PyQt6.QtCore import Qt
 import os
-
+from detection import detection
+from segmentation import segmentation
 
 class MainApp(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super(MainApp, self).__init__()
         self.setupUi(self)
+        # self.pushButton.setEnabled(False)
         self.pushButton.clicked.connect(self.load_folder)
         self.pushButton_2.clicked.connect(self.previous_image)
         self.pushButton_3.clicked.connect(self.next_image)
+        self.pushButton_4.clicked.connect(self.run_detection)
+        self.pushButton_5.clicked.connect(self.run_segmentation)
+
         self.image_list = []
         self.current_image_index = 0
         self.image_folder_path = None
@@ -57,6 +62,7 @@ class MainApp(QMainWindow, Ui_MainWindow):
             self.current_image_index = 0
             if self.image_list:
                 self.display_image()
+                self.pushButton.setEnabled(False)
             else:
                 self.label.setText("No images found in the selected folder.")
 
@@ -107,7 +113,23 @@ class MainApp(QMainWindow, Ui_MainWindow):
         if self.image_list and self.current_image_index < len(self.image_list) - 1:
             self.current_image_index += 1
             self.display_image()
-
+    
+    def run_detection(self):
+        if self.image_list:
+            current_image_path = os.path.join(self.image_folder_path, self.image_list[self.current_image_index])
+            overall_Precision, overall_Recall, overall_Accuracy, overall_IoU = detection(current_image_path)
+            print(f"Overall Metrics: Precision: {overall_Precision}, Recall: {overall_Recall}, Accuracy: {overall_Accuracy}, IoU: {overall_IoU}")
+            # Update labels with new values
+            self.label_2.setText(f"IoU: {round(overall_IoU, 4)}")
+            self.label_3.setText(f"Accuracy: {round(overall_Accuracy, 4)}")
+            self.label_4.setText(f"Precision: {round(overall_Precision, 4)}")
+            self.label_5.setText(f"Recall: {round(overall_Recall, 4)}")
+    
+    def run_segmentation(self):
+        if self.image_list:
+            current_image_path = os.path.join(self.image_folder_path, self.image_list[self.current_image_index])
+            predicted_class_label, dice_score = segmentation(current_image_path)
+            self.label_6.setText(f"Dice Coefficient: {round(dice_score, 4)} \nClassification: {predicted_class_label}")
 
 # The entry point of the application
 if __name__ == "__main__":

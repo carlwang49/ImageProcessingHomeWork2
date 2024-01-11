@@ -1,6 +1,5 @@
 import numpy as np
-from util import dice_coefficient
-from util import resize_prediction
+from util import dice_coefficient, resize_prediction
 from torchvision import transforms
 from sklearn.model_selection import KFold
 from util import get_model, ensemble_predict

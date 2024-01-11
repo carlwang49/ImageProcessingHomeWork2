@@ -28,4 +28,4 @@ ground_truth = {'boxes': torch.tensor(gt_boxes), 'labels': torch.tensor(numeric_
 image_path = '../demo_test9/c230-11996869_12.png'
 image = Image.open(image_path).convert('RGB')
 transformed_image = transform(image).to(device)  # The image is already transformed here
-draw_boxes(transformed_image, ground_truth)
+draw_boxes(transformed_image.clone(), ground_truth, title='Ground Truth')

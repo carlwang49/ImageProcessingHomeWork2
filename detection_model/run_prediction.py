@@ -1,6 +1,5 @@
 import torch
 from torchvision import transforms
-import torch
 from PIL import Image
 from util import get_model, ensemble_predict_single_image, draw_boxes
 
@@ -28,4 +27,4 @@ image = Image.open(image_path).convert('RGB')
 transformed_image = transform(image).to(device)  # The image is already transformed here
 iou_threshold = 0.5  # Set a suitable IoU threshold value
 ensemble_prediction = ensemble_predict_single_image(models, transformed_image, device, iou_threshold)
-draw_boxes(transformed_image, ensemble_prediction)
+draw_boxes(transformed_image, ensemble_prediction, title='Prediction')
